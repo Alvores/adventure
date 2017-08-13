@@ -1,0 +1,14 @@
+node_modules/
+*.class
+*~
+.DS_Store
+.metadata/
+.settings/
+RemoteSystemsTempFiles/
+.gradle/
+build/
+libs/
+.recommenders
+bin/
+.classpath
+.project
