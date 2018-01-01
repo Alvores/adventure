@@ -2,7 +2,7 @@ package com.bms.adventure.characters;
 
 public class Wizard implements CharacterClass {
 	
-	private static final int hpGain = 6;	// 1dx hit point gain on level up
+	private static final int hpGain = 4;	// 1dx hit point gain on level up
 	private static final double fortitude = 1.0;
 	private static final double will = 1.5;
 	private static final double reflex = 1.0;

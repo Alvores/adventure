@@ -15,7 +15,7 @@ public class PlayerCharacter {
 	private int currentHp; // Accounts for temporary damage and buffs
 	private int xp;	// Experience Points
 	private int level;
-	private int ac; // Armor class
+	private int acBonus; // Armor class
 	private int strength;
 	private int intellect;
 	private int wisdom;
@@ -50,6 +50,7 @@ public class PlayerCharacter {
 		pc.setWill(1.0);
 		pc.setReflex(1.0);
 		pc.setBab(1.0); // Initial BAB is 1 for all character classes
+		pc.setAc(10);
 		pc.levelUp(); // Sets character to level 1, giving appropriate starting scores.
 		return pc;
 	}
@@ -122,11 +123,11 @@ public class PlayerCharacter {
 	}
 	
 	public int getAc() {
-		return ac;
+		return acBonus;
 	}
 
-	public void setAc(int ac) {
-		this.ac = ac;
+	public void setAc(int acBonus) {
+		this.acBonus = acBonus;
 	}
 
 	public int getStrength() {
@@ -220,8 +221,8 @@ public class PlayerCharacter {
 	@Override
 	public String toString() {
 		return "Name: " + name + "\nClass: " + charClass + "\nHP: " + hp 
-				+ "\nCurrent HP: " + currentHp + "\nLevel: " + level
-				+ "\nXP: " + xp + "\nStrength: " 
+				+ "\nCurrent HP: " + currentHp + "\nAC: " + acBonus
+				+ "\nLevel: " + level + "\nXP: " + xp + "\nStrength: " 
 				+ strength + "\nIntellect: " + intellect
 				+ "\nWisdom: " + wisdom + "\nDexterity: " + dexterity
 				+ "\nCharisma: " + charisma + "\nConstitution: " + constitution
