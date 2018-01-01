@@ -1,18 +1,44 @@
 package com.bms.adventure.characters;
 
-public class Fighter extends CharacterClass {
+public class Fighter implements CharacterClass {
 
-	Fighter() {
-		setBab(1.0);
-		setHpGain(10);
-		setFortitude(2.0);
-		setWill(1.0);
-		setReflex(1.0);
-		setWeaponProficiency("Fighter");
+	private static final int hpGain = 10;	// 1dx hit point gain on level up
+	private static final double fortitude = 1.5;
+	private static final double will = 1.0;
+	private static final double reflex = 1.0;
+	private static final double bab = 1.0;		// Base attack bonus (attacks per round = 1+(bab-1)/5)
+	private static final String weaponProficiency = "Fighter";	// What weapons can be utilized by class
+	
+	public int getHpGain() {
+		return hpGain;
 	}
 	
-	protected static PlayerCharacter levelCharacter(PlayerCharacter pc) {
-		//pc.setHp(pc.getHp()+getHpGain()); Static refference issue
+	public double getFortitude() {
+		return fortitude;
+	}
+	
+	public double getWill() {
+		return will;
+	}
+
+	public double getReflex() {
+		return reflex;
+	}
+
+	public double getBab() {
+		return bab;
+	}
+
+	public String getWeaponProficiency() {
+		return weaponProficiency;
+	}
+
+	public static PlayerCharacter levelUp (PlayerCharacter pc) {
+		pc.setFortitude(pc.getFortitude()+fortitude); /////////Try THIS out
+		pc.setWill(pc.getWill()+will);
+		pc.setReflex(pc.getReflex()+reflex);
+		pc.setHp(pc.getHp()+hpGain);
+		pc.setBab(pc.getBab()+bab);
 		return pc;
 	}
 

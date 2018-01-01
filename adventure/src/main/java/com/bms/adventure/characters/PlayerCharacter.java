@@ -1,14 +1,21 @@
 package com.bms.adventure.characters;
 
 import com.bms.adventure.utils.Dice;
-import com.bms.adventure.characters.*;
 
+/**
+ * The PlayerCharacter class defines a characters profile including
+ * hit points, character class, level, and attribute points.
+ * @author Gabriel Zingle
+ */
 public class PlayerCharacter {
 	
 	private String name;
 	private String charClass;
 	private int hp; // Hit Points
+	private int currentHp; // Accounts for temporary damage and buffs
 	private int xp;	// Experience Points
+	private int level;
+	private int ac; // Armor class
 	private int strength;
 	private int intellect;
 	private int wisdom;
@@ -21,23 +28,49 @@ public class PlayerCharacter {
 	private double reflex;
 	private String faction;
 
+	/**
+	 * Private constructor enables construction of character class from a static method call.
+	 */
 	private PlayerCharacter() {
-	};
+	}
 
+	/**
+	 * Generates a new character with the indicated name and character class.
+	 * @param name the name of the character
+	 * @param charClass the character class of the character
+	 * @return the initiated player character
+	 */
 	public static PlayerCharacter makeNewPlayerCharacter(String name, String charClass) {
 		PlayerCharacter pc = new PlayerCharacter();
 		pc.setName(name);
 		pc.setCharClass(charClass);
 		pc = Dice.allocateAbilityScores(3, 6, pc);
 		pc.setFaction("Heroes");
-		pc.setFortitude(1);
-		pc.setWill(1);
-		pc.setReflex(1);
+		pc.setFortitude(1.0);
+		pc.setWill(1.0);
+		pc.setReflex(1.0);
+		pc.setBab(1.0); // Initial BAB is 1 for all character classes
+		pc.levelUp(); // Sets character to level 1, giving appropriate starting scores.
 		return pc;
 	}
 	
+	/**
+	 * Levels up the character class with appropriate attributes and abilities.
+	 */
 	public void levelUp() {
-		//hp += CharacterClass.get
+		switch(charClass) {
+		case "Fighter":
+			Fighter.levelUp(this);
+			break;
+		case "Rogue":
+			Rogue.levelUp(this);
+			break;
+		case "Wizard":
+			Wizard.levelUp(this);
+			break;
+		}
+		level++;
+		currentHp = hp;
 	}
 	
 	public void setName(String name) {
@@ -63,6 +96,14 @@ public class PlayerCharacter {
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
+	
+	public int getCurrentHp() {
+		return currentHp;
+	}
+
+	public void setCurrentHp(int currentHp) {
+		this.currentHp = currentHp;
+	}
 
 	public int getXp() {
 		return xp;
@@ -70,6 +111,22 @@ public class PlayerCharacter {
 
 	public void setXp(int xp) {
 		this.xp = xp;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public int getAc() {
+		return ac;
+	}
+
+	public void setAc(int ac) {
+		this.ac = ac;
 	}
 
 	public int getStrength() {
@@ -160,9 +217,10 @@ public class PlayerCharacter {
 		this.faction = faction;
 	}
 
-	// TODO override toString() to print out the PlayerCharacter nicely
+	@Override
 	public String toString() {
 		return "Name: " + name + "\nClass: " + charClass + "\nHP: " + hp 
+				+ "\nCurrent HP: " + currentHp + "\nLevel: " + level
 				+ "\nXP: " + xp + "\nStrength: " 
 				+ strength + "\nIntellect: " + intellect
 				+ "\nWisdom: " + wisdom + "\nDexterity: " + dexterity

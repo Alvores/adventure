@@ -1,7 +1,6 @@
 package com.bms.adventure;
 
 import com.bms.adventure.characters.*;
-import com.bms.adventure.utils.*;
 
 public class Adventure {
 	

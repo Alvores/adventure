@@ -1,18 +1,44 @@
 package com.bms.adventure.characters;
 
-public class Rogue extends CharacterClass{
+public class Rogue implements CharacterClass {
+
+	private static final int hpGain = 6;	// 1dx hit point gain on level up
+	private static final double fortitude = 1.0;
+	private static final double will = 1.0;
+	private static final double reflex = 1.5;
+	private static final double bab = 0.7;		// Base attack bonus (attacks per round = 1+(bab-1)/5)
+	private static final String weaponProficiency = "Rogue";	// What weapons can be utilized by class
 	
-	Rogue() {
-		setBab(0.7);
-		setHpGain(6);
-		setFortitude(1.0);
-		setWill(1.0);
-		setReflex(2.0);
-		setWeaponProficiency("Rogue");
+	public int getHpGain() {
+		return hpGain;
+	}
+	
+	public double getFortitude() {
+		return fortitude;
+	}
+	
+	public double getWill() {
+		return will;
 	}
 
-	protected static PlayerCharacter levelCharacter(PlayerCharacter pc) {
+	public double getReflex() {
+		return reflex;
+	}
+
+	public double getBab() {
+		return bab;
+	}
+
+	public String getWeaponProficiency() {
+		return weaponProficiency;
+	}
+
+	public static PlayerCharacter levelUp (PlayerCharacter pc) {
+		pc.setFortitude(pc.getFortitude()+fortitude); /////////Try THIS out
+		pc.setWill(pc.getWill()+will);
+		pc.setReflex(pc.getReflex()+reflex);
+		pc.setHp(pc.getHp()+hpGain);
+		pc.setBab(pc.getBab()+bab);
 		return pc;
 	}
-
 }
