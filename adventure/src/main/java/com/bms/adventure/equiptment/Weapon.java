@@ -9,12 +9,6 @@ import com.bms.adventure.utils.Dice;
  */
 public class Weapon {
 	
-	// Defines the types of weapons
-	private static final String longSword = "Longsword";
-	private static final String dagger = "Dagger";
-	private static final String staff = "Staff";
-	private static final String bow = "Bow";
-	
 	// Defines weapon properties
 	private String weaponType; // Type of sword, axe, bow, etc...
 	private int ndice; // Number of dice
@@ -22,7 +16,7 @@ public class Weapon {
 	private int critThreshold; // Dice roll that enables critical strike
 	private int critMultiplier; // Critical damage multiplier
 	private int attackRange; // Range in meters
-	private int modifier; // Damage and hit chance modifier
+	private int modifier; // Damage and hit chance modifier enchant
 	private String fundamentalType; // Melee or ranged
 	private double weight; // Weight in lbs
 	private int cost; // Gold coins
@@ -49,7 +43,7 @@ public class Weapon {
 		return Dice.rollDice(1, 20, modifier); // Roll to hit target
 	}
 	
-	// Standard getters and setters for properties
+	// Standard getters and setters for weapon properties
 	public String getWeaponType() {
 		return weaponType;
 	}
