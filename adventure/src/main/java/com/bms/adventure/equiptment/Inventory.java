@@ -1,37 +1,66 @@
 package com.bms.adventure.equiptment;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * The Inventory class holds an assortment of items that belong to a character.
  * @author Gabriel Zingle
  */
 public class Inventory {
+	// Equipped
+	private Item chestSlot;
+	private Item leftHand;
+	private Item rightHand;
 	
-	private HashMap<String, Weapon> weapons;
-	private HashMap<String, Armor> armor;
+	// Backpack
+	private ArrayList<Item> weapons;
+	private ArrayList<Item> armors;
 	private int weight; // Combined weight of items in the inventory
 	private int goldCoins; // Total wealth
 	
 	public Inventory () {
-		weapons = new HashMap<>();
-		armor = new HashMap<>();
+		// Initialize backpack;
+		weapons = new ArrayList<>();
+		armors = new ArrayList<>();
 		setWeight(0);
 		setGoldCoins(0);
+		chestSlot = null;
+		leftHand = null;
+		rightHand = null;
+	}
+	
+	public void equipChestSlot(Item item) {
+		if (item != null && chestSlot != null) {
+			chestSlot = item;
+		}
+	}
+
+	public void equipLeftHand(Item item) {
+		if (item != null && leftHand != null) {
+			leftHand = item;
+		}
+	}
+
+	public void equipRightHand(Item item) {
+		if (item != null && rightHand != null) {
+			rightHand = item;
+		}
 	}
 	
 	// Getters and setters for Inventory properties
-	public HashMap<String, Weapon> getWeapons() {
+	public ArrayList<Item> getWeapons() {
 		return weapons;
 	}
 	public void addWeapon(Weapon weapon) {
-		
+		weapons.add(weapon);
+		weight += weapon.getWeight();
 	}
-	public HashMap<String, Armor> getArmor() {
-		return armor;
+	public ArrayList<Item> getArmor() {
+		return armors;
 	}
 	private void addArmor(Armor armor) {
-		
+		armors.add(armor);
+		weight += armor.getWeight();
 	}
 	public int getWeight() {
 		return weight;

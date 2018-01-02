@@ -7,7 +7,7 @@ import com.bms.adventure.utils.Dice;
  * including damage, range, and critical strike properties.
  * @author Gabriel Zingle
  */
-public class Weapon {
+public class Weapon extends Item {
 	
 	// Defines weapon properties
 	private String weaponType; // Type of sword, axe, bow, etc...
@@ -18,13 +18,10 @@ public class Weapon {
 	private int attackRange; // Range in meters
 	private int modifier; // Damage and hit chance modifier enchant
 	private String fundamentalType; // Melee or ranged
-	private double weight; // Weight in lbs
-	private int cost; // Gold coins
-	private String id; // Unique item ID
-	private boolean equipped; // Deafult false
 	
 	public Weapon (String weaponType, int ndice, int nsides, int critThreshold, int critMultiplier, 
 			int attackRange, String fundamentalType, double weight, int cost, String id) {
+		super(weight, cost, id);
 		setWeaponType(weaponType);
 		setNdice(ndice);
 		setNsides(nsides);
@@ -32,10 +29,6 @@ public class Weapon {
 		setCritMultiplier(critMultiplier);
 		setAttackRange(attackRange);
 		setFundamentalType(fundamentalType);
-		setWeight(weight);
-		setCost(cost);
-		setID(id);
-		setEquipped(false);
 	}
 	
 	// Weapon functionality
@@ -89,30 +82,6 @@ public class Weapon {
 	}
 	public void setFundamentalType(String fundamentalType) {
 		this.fundamentalType = fundamentalType;
-	}
-	public double getWeight() {
-		return weight;
-	}
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-	public int getCost() {
-		return cost;
-	}
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-	public String getID() {
-		return id;
-	}
-	public void setID(String id) {
-		this.id = id;
-	}
-	public boolean isEquipped() {
-		return equipped;
-	}
-	public void setEquipped(boolean equipped) {
-		this.equipped = equipped;
 	}
 	
 }
