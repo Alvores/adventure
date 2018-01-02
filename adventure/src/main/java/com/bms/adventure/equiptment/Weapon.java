@@ -20,9 +20,11 @@ public class Weapon {
 	private String fundamentalType; // Melee or ranged
 	private double weight; // Weight in lbs
 	private int cost; // Gold coins
+	private String id; // Unique item ID
+	private boolean equipped; // Deafult false
 	
 	public Weapon (String weaponType, int ndice, int nsides, int critThreshold, int critMultiplier, 
-			int attackRange, String fundamentalType, double weight, int cost) {
+			int attackRange, String fundamentalType, double weight, int cost, String id) {
 		setWeaponType(weaponType);
 		setNdice(ndice);
 		setNsides(nsides);
@@ -32,6 +34,8 @@ public class Weapon {
 		setFundamentalType(fundamentalType);
 		setWeight(weight);
 		setCost(cost);
+		setID(id);
+		setEquipped(false);
 	}
 	
 	// Weapon functionality
@@ -97,6 +101,18 @@ public class Weapon {
 	}
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+	public String getID() {
+		return id;
+	}
+	public void setID(String id) {
+		this.id = id;
+	}
+	public boolean isEquipped() {
+		return equipped;
+	}
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
 	}
 	
 }

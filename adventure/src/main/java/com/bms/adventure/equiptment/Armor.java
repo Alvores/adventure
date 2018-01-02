@@ -13,7 +13,10 @@ public class Armor {
 	private int modifier; // ac modifier enchant
 	private String armorSlot; // Helmet, chest, boots, etc...
 	private double weight; // Weight in lbs
-	private int cost; // Gold coins	
+	private int cost; // Gold coins
+	private String id; // Unique item ID
+	private boolean equipped; // Deafult false
+	
 	
 	// Armor functionality
 	public Armor(String armorType, int ac, int modifier, 
@@ -24,6 +27,8 @@ public class Armor {
 		setArmorSlot(armorSlot);
 		setWeight(weight);
 		setCost(cost);
+		setID(id);
+		setEquipped(false);
 	}
 	
 	// Standard getters and setters for armor properties
@@ -62,6 +67,18 @@ public class Armor {
 	}
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+	public String getID() {
+		return id;
+	}
+	public void setID(String id) {
+		this.id = id;
+	}
+	public boolean isEquipped() {
+		return equipped;
+	}
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
 	}
 
 }
