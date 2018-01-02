@@ -30,19 +30,19 @@ public class Inventory {
 	}
 	
 	public void equipChestSlot(Item item) {
-		if (item != null && chestSlot != null) {
+		if (item != null && armors.contains(item)) {
 			chestSlot = item;
 		}
 	}
 
 	public void equipLeftHand(Item item) {
-		if (item != null && leftHand != null) {
+		if (item != null && (weapons.contains(item) || armors.contains(item))) {
 			leftHand = item;
 		}
 	}
 
 	public void equipRightHand(Item item) {
-		if (item != null && rightHand != null) {
+		if (item != null && (weapons.contains(item) || armors.contains(item))) {
 			rightHand = item;
 		}
 	}
