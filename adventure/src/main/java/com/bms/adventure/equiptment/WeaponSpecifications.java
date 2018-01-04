@@ -13,17 +13,15 @@ public class WeaponSpecifications extends Item {
 	private int critThreshold; // Dice roll that enables critical strike
 	private int critMultiplier; // Critical damage multiplier
 	private int attackRange; // Range in meters
-	private String fundamentalType; // Melee or ranged
 	
 	public WeaponSpecifications (String name, int ndice, int nsides, int critThreshold, int critMultiplier, 
-			int attackRange, String fundamentalType, double weight, int cost, String id) {
-		super(name, weight, cost, id);
+			int attackRange, double weight, int cost) {
+		super(name, weight, cost);
 		setNdice(ndice);
 		setNsides(nsides);
 		setCritThreshold(critThreshold);
 		setCritMultiplier(critMultiplier);
 		setAttackRange(attackRange);
-		setFundamentalType(fundamentalType);
 	}
 	
 	// Standard getters and setters for weapon properties
@@ -65,14 +63,6 @@ public class WeaponSpecifications extends Item {
 
 	public void setAttackRange(int attackRange) {
 		this.attackRange = attackRange;
-	}
-
-	public String getFundamentalType() {
-		return fundamentalType;
-	}
-
-	public void setFundamentalType(String fundamentalType) {
-		this.fundamentalType = fundamentalType;
 	}
 
 }
