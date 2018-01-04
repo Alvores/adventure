@@ -2,7 +2,7 @@ package com.bms.adventure.equiptment;
 
 import java.util.HashMap;
 
-public class AllWeapons {
+public class WeaponInitiator {
 	
 	// Define the types of weapons
 //	private static final Weapon longSword = 

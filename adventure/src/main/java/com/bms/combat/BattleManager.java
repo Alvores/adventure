@@ -18,28 +18,33 @@ public class BattleManager {
 	}
 	
 	public void battle() {
-		int round = 0;
+		int round = 1;
 		boolean fighting = false;
 		int playerInitiative;
 		int opponentInitiative;
 		
 		while (fighting) {
+			System.out.println("Round " + round + ": ");
 			playerInitiative = Dice.rollDice(1, 20, (player.getDexterity() - 10) / 2);
 			opponentInitiative = Dice.rollDice(1, 20, (player.getDexterity() - 10) / 2);
-			fighting  = turn();
-			if (player.getHp() <= 0 || opponent.getHp() <= 0) {
-				fighting = true;
-				break;
+			if (playerInitiative > opponentInitiative) {
+				fighting  = turn(player, opponent);
+			} else if (opponentInitiative > playerInitiative) {
+				fighting = turn(opponent, player);
 			}
 			round++; // End round
 		}
 	}
 	
-	public boolean turn() {
+	public boolean turn(PlayerCharacter attacker, PlayerCharacter defender) {
 		if (player.getHp() <= 0 || opponent.getHp() <= 0) {
 			return false;
 		}
 		return true;
+	}
+	
+	public void attackTarget() {
+		
 	}
 
 }

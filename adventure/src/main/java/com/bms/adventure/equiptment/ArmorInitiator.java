@@ -1,6 +1,6 @@
 package com.bms.adventure.equiptment;
 
-public class AllArmor {
+public class ArmorInitiator {
 
 	// Define the types of armor
 	private static final String platemail = "Platemail";

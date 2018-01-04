@@ -7,81 +7,53 @@ import com.bms.adventure.utils.Dice;
  * including damage, range, and critical strike properties.
  * @author Gabriel Zingle
  */
-public class Weapon extends Item {
+public class Weapon {
 	
 	// Defines weapon properties
-	private String weaponType; // Type of sword, axe, bow, etc...
-	private int ndice; // Number of dice
-	private int nsides; // Type of dice
-	private int critThreshold; // Dice roll that enables critical strike
-	private int critMultiplier; // Critical damage multiplier
-	private int attackRange; // Range in meters
-	private int modifier; // Damage and hit chance modifier enchant
-	private String fundamentalType; // Melee or ranged
+	private String description;
+	private int enhancementBonus; // Magical damage and hit chance modifier
+	private WeaponSpecifications weaponSpecifications; // Holds details such as damage and critical properties
+	private static final String slot = "HAND_WEAPON";
 	
-	public Weapon (String weaponType, int ndice, int nsides, int critThreshold, int critMultiplier, 
-			int attackRange, String fundamentalType, double weight, int cost, String id) {
-		super(weight, cost, id);
-		setWeaponType(weaponType);
-		setNdice(ndice);
-		setNsides(nsides);
-		setCritThreshold(critThreshold);
-		setCritMultiplier(critMultiplier);
-		setAttackRange(attackRange);
-		setFundamentalType(fundamentalType);
+	public Weapon (String description, int enhancementBonus, WeaponSpecifications weaponSpecifications) {
+		setDescription(description);
+		setEnhancementBonus(enhancementBonus);
+		setWeaponSpecifications(weaponSpecifications);
 	}
 	
 	// Weapon functionality
 	public int rollDamage() {
-		return Dice.rollDice(ndice, nsides, modifier); // Roll damage
+		int ndice = weaponSpecifications.getNdice();
+		int nsides = weaponSpecifications.getNsides();
+		return Dice.rollDice(ndice, nsides, enhancementBonus); // Roll damage
 	}
 	
 	public int attackRoll() {
-		return Dice.rollDice(1, 20, modifier); // Roll to hit target
+		return Dice.rollDice(1, 20, enhancementBonus); // Roll to hit target
 	}
-	
-	// Standard getters and setters for weapon properties
-	public String getWeaponType() {
-		return weaponType;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setWeaponType(String weaponType) {
-		this.weaponType = weaponType;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public int getNdice() {
-		return ndice;
+
+	public int getEnhancementBonus() {
+		return enhancementBonus;
 	}
-	public void setNdice(int ndice) {
-		this.ndice = ndice;
+
+	public void setEnhancementBonus(int enhancementBonus) {
+		this.enhancementBonus = enhancementBonus;
 	}
-	public int getNsides() {
-		return nsides;
+
+	public WeaponSpecifications getWeaponSpecifications() {
+		return weaponSpecifications;
 	}
-	public void setNsides(int nsides) {
-		this.nsides = nsides;
-	}
-	public int getCritThreshold() {
-		return critThreshold;
-	}
-	public void setCritThreshold(int critThreshold) {
-		this.critThreshold = critThreshold;
-	}
-	public int getCritMultiplier() {
-		return critMultiplier;
-	}
-	public void setCritMultiplier(int critMultiplier) {
-		this.critMultiplier = critMultiplier;
-	}
-	public int getAttackRange() {
-		return attackRange;
-	}
-	public void setAttackRange(int attackRange) {
-		this.attackRange = attackRange;
-	}
-	public String getFundamentalType() {
-		return fundamentalType;
-	}
-	public void setFundamentalType(String fundamentalType) {
-		this.fundamentalType = fundamentalType;
+
+	public void setWeaponSpecifications(WeaponSpecifications weaponSpecifications) {
+		this.weaponSpecifications = weaponSpecifications;
 	}
 	
 }
