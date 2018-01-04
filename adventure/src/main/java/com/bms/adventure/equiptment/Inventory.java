@@ -48,20 +48,20 @@ public class Inventory {
 	}
 	
 	// Getters and setters for Inventory properties
-	public ArrayList<Item> getWeapons() {
-		return weapons;
-	}
-	public void addWeapon(Weapon weapon) {
-		weapons.add(weapon);
-		weight += weapon.getWeight();
-	}
-	public ArrayList<Item> getArmor() {
-		return armors;
-	}
-	private void addArmor(Armor armor) {
-		armors.add(armor);
-		weight += armor.getWeight();
-	}
+//	public ArrayList<Item> getWeapons() {
+//		return weapons;
+//	}
+//	public void addWeapon(Weapon weapon) {
+//		weapons.add(weapon);
+//		weight += weapon.getWeight();
+//	}
+//	public ArrayList<Item> getArmor() {
+//		return armors;
+//	}
+//	private void addArmor(Armor armor) {
+//		armors.add(armor);
+//		weight += armor.getWeight();
+//	}
 	public int getWeight() {
 		return weight;
 	}

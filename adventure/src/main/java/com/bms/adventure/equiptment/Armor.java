@@ -14,9 +14,9 @@ public class Armor extends Item {
 	private String armorSlot; // Helmet, chest, boots, etc...
 		
 	// Armor functionality
-	public Armor(String armorType, int ac, int modifier, 
-			String armorSlot, double weight, int cost, String id) {
-		super(weight, cost, id);
+	public Armor(String name, String armorType, int ac, int modifier, 
+			String armorSlot, double weight, int cost) {
+		super(name, weight, cost);
 		setArmorType(armorType);
 		setAc(ac);
 		setModifier(modifier);
