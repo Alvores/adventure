@@ -8,6 +8,7 @@ package com.bms.adventure.equiptment;
 public class WeaponSpecifications extends Item {
 	
 	// Defines weapon properties
+	private String name;
 	private int ndice; // Number of dice
 	private int nsides; // Type of dice
 	private int critThreshold; // Dice roll that enables critical strike
@@ -25,6 +26,7 @@ public class WeaponSpecifications extends Item {
 	}
 	
 	// Standard getters and setters for weapon properties
+	
 	public int getNdice() {
 		return ndice;
 	}

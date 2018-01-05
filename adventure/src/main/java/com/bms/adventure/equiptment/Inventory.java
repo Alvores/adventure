@@ -8,69 +8,76 @@ import java.util.ArrayList;
  */
 public class Inventory {
 	// Equipped
-	private Item chestSlot;
-	private Item leftHand;
-	private Item rightHand;
+	private Armor armor;
+	private Weapon weapon;
 	
 	// Backpack
-	private ArrayList<Item> weapons;
-	private ArrayList<Item> armors;
+	private ArrayList<Weapon> weapons;
+	private ArrayList<Armor> armors;
 	private int weight; // Combined weight of items in the inventory
 	private int goldCoins; // Total wealth
 	
-	public Inventory () {
+	public Inventory (String charClass) {
 		// Initialize backpack;
 		weapons = new ArrayList<>();
 		armors = new ArrayList<>();
 		setWeight(0);
 		setGoldCoins(0);
-		chestSlot = null;
-		leftHand = null;
-		rightHand = null;
+		initialGear(charClass);
 	}
 	
-	public void equipChestSlot(Item item) {
+	private void initialGear(String charClass) {
+		switch (charClass) {
+		case "Fighter":
+			armor = ArmorFactory.getArmor("chainmail"); 
+			weapon = WeaponFactory.getWeapon("longsword");
+			break;
+		}
+	}
+	
+	public void equipArmor(Armor item) {
 		if (item != null && armors.contains(item)) {
-			chestSlot = item;
+			armor = item;
 		}
 	}
 
-	public void equipLeftHand(Item item) {
-		if (item != null && (weapons.contains(item) || armors.contains(item))) {
-			leftHand = item;
-		}
-	}
-
-	public void equipRightHand(Item item) {
-		if (item != null && (weapons.contains(item) || armors.contains(item))) {
-			rightHand = item;
+	public void equipWeapon(Weapon item) {
+		if (item != null && weapons.contains(item)) {
+			weapon = item;
 		}
 	}
 	
 	// Getters and setters for Inventory properties
-//	public ArrayList<Item> getWeapons() {
-//		return weapons;
-//	}
-//	public void addWeapon(Weapon weapon) {
-//		weapons.add(weapon);
-//		weight += weapon.getWeight();
-//	}
-//	public ArrayList<Item> getArmor() {
-//		return armors;
-//	}
-//	private void addArmor(Armor armor) {
-//		armors.add(armor);
-//		weight += armor.getWeight();
-//	}
+	public Weapon getWeapon() {
+		return weapon;
+	}
+	
+	public void addWeapon(Weapon weapon) {
+		weapons.add(weapon);
+		weight += weapon.getWeaponSpecifications().getWeight();
+	}
+	
+	public Armor getArmor() {
+		return armor;
+	}
+	
+	public void addArmor(Armor armor) {
+		armors.add(armor);
+		weight += armor.getArmorSpecifications().getWeight();
+	}
+	
 	public int getWeight() {
 		return weight;
 	}
+	
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+	
 	public int getGoldCoins() {
 		return goldCoins;
 	}
+	
 	public void setGoldCoins(int goldCoins) {
 		this.goldCoins = goldCoins;
 	}

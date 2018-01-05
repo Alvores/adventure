@@ -5,6 +5,10 @@ import java.util.Properties;
 
 import com.bms.adventure.utils.PropertyLoader;
 
+/**
+ * Loads basic weapon molds into a map for retrieval by a factory class.
+ * @author Gabriel Zingle
+ */
 public class WeaponInitiator {
 	
 	// Define the types of weapons
@@ -17,7 +21,6 @@ public class WeaponInitiator {
 	private static final String BOW = "bow";
 	
 	// Initialization properties
-	private static String id; // Gives id enabling inventory to hold multiples items of same effective type
 	private static HashMap<String, WeaponSpecifications> weapons; // Weapons list
 	
 	// Temporary method for testing purposes

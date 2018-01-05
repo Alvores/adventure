@@ -1,5 +1,6 @@
 package com.bms.adventure.characters;
 
+import com.bms.adventure.equiptment.Inventory;
 import com.bms.adventure.utils.Dice;
 
 /**
@@ -27,6 +28,7 @@ public class PlayerCharacter {
 	private double will;
 	private double reflex;
 	private String faction;
+	private Inventory inventory;
 
 	/**
 	 * Private constructor enables construction of character class from a static method call.
@@ -52,6 +54,7 @@ public class PlayerCharacter {
 		pc.setBab(1.0); // Initial BAB is 1 for all character classes
 		pc.setAc(10);
 		pc.levelUp(); // Sets character to level 1, giving appropriate starting scores.
+		pc.inventory = new Inventory(charClass);
 		return pc;
 	}
 	

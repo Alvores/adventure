@@ -5,48 +5,43 @@ package com.bms.adventure.equiptment;
  * such as armor class.
  * @author Gabriel Zingle
  */
-public class Armor extends Item {
+public class Armor {
 	
 	// Defines armor properties
-	private String armorType; // Type of platemail, chainmail, leather, or cloth
-	private int ac; // Armor bonus
-	private int modifier; // ac modifier enchant
-	private String armorSlot; // Helmet, chest, boots, etc...
+	private String description;
+	private int enhancementBonus; // Magical armor modifier
+	private static final String slot = "ARMOR";
+	private ArmorSpecifications armorSpecifications; // Holds details such as damage and critical properties
 		
 	// Armor functionality
-	public Armor(String name, String armorType, int ac, int modifier, 
-			String armorSlot, double weight, int cost) {
-		super(name, weight, cost);
-		setArmorType(armorType);
-		setAc(ac);
-		setModifier(modifier);
-		setArmorSlot(armorSlot);
+	public Armor(String description, int enhancementBonus, ArmorSpecifications armorSpecifications) {
+		setDescription(description);
+		setEnhancementBonus(enhancementBonus);
+		setArmorSpecifications(armorSpecifications);
 	}
 	
-	// Standard getters and setters for armor properties
-	public String getArmorType() {
-		return armorType;
+	public String getDescription() {
+		return description;
 	}
-	public void setArmorType(String armorType) {
-		this.armorType = armorType;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public int getAc() {
-		return ac;
+
+	public int getEnhancementBonus() {
+		return enhancementBonus;
 	}
-	public void setAc(int ac) {
-		this.ac = ac;
+
+	public void setEnhancementBonus(int enhancementBonus) {
+		this.enhancementBonus = enhancementBonus;
 	}
-	public int getModifier() {
-		return modifier;
+
+	public ArmorSpecifications getArmorSpecifications() {
+		return armorSpecifications;
 	}
-	public void setModifier(int modifier) {
-		this.modifier = modifier;
-	}
-	public String getArmorSlot() {
-		return armorSlot;
-	}
-	public void setArmorSlot(String armorSlot) {
-		this.armorSlot = armorSlot;
+
+	public void setArmorSpecifications(ArmorSpecifications armorSpecifications) {
+		this.armorSpecifications = armorSpecifications;
 	}
 
 }
