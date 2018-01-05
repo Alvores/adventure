@@ -77,6 +77,18 @@ public class PlayerCharacter {
 		currentHp = hp;
 	}
 	
+	public int attackRollBonus() {
+		int attack = inventory.getWeapon().getEnhancementBonus();
+		attack += (getStrength() - 10) / 2;
+		return attack;
+	}
+	
+	public int damageRollTotal() {
+		int damage = inventory.getWeapon().rollDamage();
+		damage += (getStrength() - 10) / 2;
+		return damage;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -126,7 +138,17 @@ public class PlayerCharacter {
 	}
 	
 	public int getAc() {
-		return acBonus;
+		int bonus = 0;
+		int maxDex = inventory.getArmor().getArmorSpecifications().getMaxDexterityAC(); // Max Dexterity Bonus
+		int dexBonus = (getDexterity() - 10) / 2;
+		if (maxDex < dexBonus) {
+			bonus = maxDex;
+		} else {
+			bonus = dexBonus;
+		}
+		bonus += inventory.getArmor().getArmorSpecifications().getAc(); // Main armor bonus
+		acBonus += bonus;
+		return acBonus; // Base 10 + Armor with Dexterity
 	}
 
 	public void setAc(int acBonus) {
@@ -219,6 +241,10 @@ public class PlayerCharacter {
 
 	public void setFaction(String faction) {
 		this.faction = faction;
+	}
+	
+	public Inventory getInventory() {
+		return inventory;
 	}
 
 	@Override
