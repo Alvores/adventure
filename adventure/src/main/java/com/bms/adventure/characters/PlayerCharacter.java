@@ -250,7 +250,7 @@ public class PlayerCharacter {
 	@Override
 	public String toString() {
 		return "Name: " + name + "\nClass: " + charClass + "\nHP: " + hp 
-				+ "\nCurrent HP: " + currentHp + "\nAC: " + acBonus
+				+ "\nCurrent HP: " + currentHp + "\nAC: " + getAc()
 				+ "\nLevel: " + level + "\nXP: " + xp + "\nStrength: " 
 				+ strength + "\nIntellect: " + intellect
 				+ "\nWisdom: " + wisdom + "\nDexterity: " + dexterity

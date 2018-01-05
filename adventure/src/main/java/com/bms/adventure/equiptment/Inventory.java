@@ -12,8 +12,8 @@ public class Inventory {
 	private Weapon weapon;
 	
 	// Backpack
-	private ArrayList<Weapon> weapons;
-	private ArrayList<Armor> armors;
+	private ArrayList<Weapon> weapons; // List of weapons in the inventory
+	private ArrayList<Armor> armors; // List of armor pieces in the inventory
 	private int weight; // Combined weight of items in the inventory
 	private int goldCoins; // Total wealth
 	
@@ -22,7 +22,7 @@ public class Inventory {
 		weapons = new ArrayList<>();
 		armors = new ArrayList<>();
 		setWeight(0);
-		setGoldCoins(0);
+		setGoldCoins(50);
 		initialGear(charClass);
 	}
 	
@@ -32,7 +32,17 @@ public class Inventory {
 			armor = ArmorFactory.getArmor("chainmail"); 
 			weapon = WeaponFactory.getWeapon("longsword");
 			break;
+		case "Rogue":
+			armor = ArmorFactory.getArmor("leather");
+			weapon = WeaponFactory.getWeapon("dagger");
+			break;
+		case "Wizard":
+			armor = ArmorFactory.getArmor("cloth");
+			weapon = WeaponFactory.getWeapon("staff");
+			break;
 		}
+		armors.add(armor);
+		weapons.add(weapon);
 	}
 	
 	public void equipArmor(Armor item) {
