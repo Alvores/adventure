@@ -10,7 +10,7 @@ import com.bms.adventure.utils.Dice;
 public class Weapon {
 	
 	// Defines weapon properties
-	private String description;
+	private String description; // Avoid commas for file reader delimiter
 	private int enhancementBonus; // Magical damage and hit chance modifier
 	private WeaponSpecifications weaponSpecifications; // Holds details such as damage and critical properties
 	private static final String slot = "HAND_WEAPON";
@@ -54,6 +54,15 @@ public class Weapon {
 
 	public void setWeaponSpecifications(WeaponSpecifications weaponSpecifications) {
 		this.weaponSpecifications = weaponSpecifications;
+	}
+	
+	public String getSlot() {
+		return slot;
+	}
+	
+	@Override
+	public String toString() {
+		return weaponSpecifications.toString() + "," + enhancementBonus  + "," + description;
 	}
 	
 }

@@ -18,6 +18,9 @@ public class BattleManager {
 	}
 	
 	public void battle() {
+		System.out.println("The combatants are:");
+		System.out.println(player.toString());
+		System.out.println(opponent.toString());
 		int round = 1;
 		boolean fighting = false;
 		int playerInitiative;
@@ -46,26 +49,25 @@ public class BattleManager {
 			return false;
 		}
 		attackTarget(attacker, defender);
+		System.out.println(attacker.getName() + " has " + attacker.getCurrentHp() + 
+				" and " + defender.getName() + " has " + defender.getCurrentHp());
 		return true;
 	}
 	
 	public void attackTarget(PlayerCharacter attacker, PlayerCharacter defender) {
-		boolean hit = false;
 		boolean crit = false;
 		// Check for natural critical or miss
 		int roll = Dice.rollDice(1, 20);
 		// Check hit
 		if (roll == 20) { // Natural 20
-			hit = true;
+			System.out.println("The attacker hits the target with a roll of 20.");
 		} else if (roll == 1) { // Natural miss
-			hit = false;
+			System.out.println("The attacker misses the target with a roll of 1.");
 		} else { // Check total hit roll against defenders armor class
 			roll += attacker.attackRollBonus();
-			if (roll >= defender.getAc()) {
-				hit = true;
-			} else {
-				hit = false;
-			}
+			if (roll < defender.getAc()) {
+				return;
+			} 
 		}
 		// Check crit if applicable
 		int critThreshold = attacker.getInventory().getWeapon().getWeaponSpecifications().getCritThreshold();
@@ -76,6 +78,7 @@ public class BattleManager {
 			int critMultiplier = attacker.getInventory().getWeapon().getWeaponSpecifications().getCritMultiplier();
 			damage *= critMultiplier;
 		}
+		System.out.println(attacker.getName() + " has dealt " + damage + " to " + defender.getName());
 		defender.setCurrentHp(defender.getCurrentHp()-damage);
 	}
 
