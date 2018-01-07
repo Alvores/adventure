@@ -247,8 +247,7 @@ public class PlayerCharacter {
 		return inventory;
 	}
 
-	@Override
-	public String toString() {
+	public String styledToString() {
 		return "Name: " + name + "\nClass: " + charClass + "\nHP: " + hp 
 				+ "\nCurrent HP: " + currentHp + "\nAC: " + getAc()
 				+ "\nLevel: " + level + "\nXP: " + xp + "\nStrength: " 
@@ -258,5 +257,13 @@ public class PlayerCharacter {
 				+ "\nBAB: " + (int)bab + "\nSaves (Fort/Will/Reflex): " 
 				+ (int)fortitude + "/" + (int)will + "/" + (int)reflex 
 				+ "\nFaction: " + faction;
+	}
+	
+	@Override
+	public String toString() { // Add inventory later
+		return name + "," + charClass + "," + hp + "," + currentHp + "," + getAc()  + "," + level
+				+ "," + xp + "," + strength + "," + intellect + "," + wisdom + "," + dexterity
+				+ "," + charisma + "," + constitution + "," + bab + "," + fortitude
+				+ "," + will  + "," + reflex + "," + faction;
 	}
 }

@@ -31,9 +31,7 @@ public class WeaponRecordIO {
 			}
 			return weapons;
 		}
-
 	}
-	
 	
 	private static Weapon readWeapon(String line) {
 		String[] record = line.split(",");
@@ -57,6 +55,7 @@ public class WeaponRecordIO {
 		return weapon;
 	}
 	
+	// WeaponRecords
 	public static void writeWeaponRecords(String file, ArrayList<Weapon> weapons) throws 	IOException {
 		try (PrintStream output = new PrintStream(new File(file))) {
 			for (Weapon w: weapons) {

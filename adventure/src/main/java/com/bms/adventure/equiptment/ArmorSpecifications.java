@@ -34,5 +34,10 @@ public class ArmorSpecifications extends Item {
 	public void setMaxDexterityAC(int maxDexterityAC) {
 		this.maxDexterityAC = maxDexterityAC;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + "," + ac + "," + maxDexterityAC;
+	}
 
 }

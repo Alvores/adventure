@@ -43,5 +43,10 @@ public class Armor {
 	public void setArmorSpecifications(ArmorSpecifications armorSpecifications) {
 		this.armorSpecifications = armorSpecifications;
 	}
+	
+	@Override
+	public String toString() {
+		return armorSpecifications.toString() + "," + enhancementBonus + "," + description;
+	}
 
 }
