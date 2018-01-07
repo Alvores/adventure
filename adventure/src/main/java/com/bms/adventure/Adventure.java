@@ -15,11 +15,14 @@ public class Adventure {
 		String name;
 		
 		name = "Baldur";
-		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Fighter"));
+		AllCharacters.addMember(new PlayerCharacter(name, "Fighter"));
+//		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Fighter"));
 		name = "Anduril";
-		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Rogue"));
+		AllCharacters.addMember(new PlayerCharacter(name, "Rogue"));
+//		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Rogue"));
 		name = "Finnr";
-		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Wizard"));	
+		AllCharacters.addMember(new PlayerCharacter(name, "Wizard"));
+//		AllCharacters.addMember(PlayerCharacter.makeNewPlayerCharacter(name, "Wizard"));	
 		
 		System.out.println(AllCharacters.listPlayers());
 //		System.out.println(AllCharacters.playerInformation("Baldur"));

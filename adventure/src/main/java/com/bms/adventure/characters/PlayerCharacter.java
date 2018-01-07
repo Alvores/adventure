@@ -30,10 +30,41 @@ public class PlayerCharacter {
 	private String faction;
 	private Inventory inventory;
 
+	public PlayerCharacter(String name, String charClass) {
+		setName(name);
+		setCharClass(charClass);
+		Dice.allocateAbilityScores(3, 6, this);
+		setFaction("Heroes");
+		setBab(1.0); // Initial BAB is 1 for all character classes
+		setAc(10);
+		levelUp(); // Sets character to level 1, giving appropriate starting scores.
+		inventory = new Inventory(charClass);
+	}
+	
 	/**
-	 * Private constructor enables construction of character class from a static method call.
+	 * Used for reloading a character from a file.
 	 */
-	private PlayerCharacter() {
+	public static PlayerCharacter reloadCharacter(String name, String charClass, int hp,
+			int currentHp, int acBonus, int level, int xp, int strength, int intellect, int wisdom,
+			int dexterity, int charisma, int constitution, int bab, double fortitude,
+			double will, double reflex, String faction) {
+		PlayerCharacter pc = new PlayerCharacter(name, charClass);
+		pc.setCurrentHp(currentHp);
+		pc.setAc(acBonus);
+		pc.setLevel(level);
+		pc.setXp(xp);
+		pc.setStrength(strength);
+		pc.setIntellect(intellect);
+		pc.setWisdom(wisdom);
+		pc.setDexterity(dexterity);
+		pc.setCharisma(charisma);
+		pc.setConstitution(constitution);
+		pc.setBab(bab);
+		pc.setFortitude(fortitude);
+		pc.setWill(will);
+		pc.setReflex(reflex);
+		pc.setFaction(faction);
+		return pc; // Add inventory reloader later
 	}
 
 	/**
@@ -42,21 +73,21 @@ public class PlayerCharacter {
 	 * @param charClass the character class of the character
 	 * @return the initiated player character
 	 */
-	public static PlayerCharacter makeNewPlayerCharacter(String name, String charClass) {
-		PlayerCharacter pc = new PlayerCharacter();
-		pc.setName(name);
-		pc.setCharClass(charClass);
-		pc = Dice.allocateAbilityScores(3, 6, pc);
-		pc.setFaction("Heroes");
-		pc.setFortitude(1.0);
-		pc.setWill(1.0);
-		pc.setReflex(1.0);
-		pc.setBab(1.0); // Initial BAB is 1 for all character classes
-		pc.setAc(10);
-		pc.levelUp(); // Sets character to level 1, giving appropriate starting scores.
-		pc.inventory = new Inventory(charClass);
-		return pc;
-	}
+//	public static PlayerCharacter makeNewPlayerCharacter(String name, String charClass) {
+//		PlayerCharacter pc = new PlayerCharacter();
+//		pc.setName(name);
+//		pc.setCharClass(charClass);
+//		pc = Dice.allocateAbilityScores(3, 6, pc);
+//		pc.setFaction("Heroes");
+//		pc.setFortitude(1.0);
+//		pc.setWill(1.0);
+//		pc.setReflex(1.0);
+//		pc.setBab(1.0); // Initial BAB is 1 for all character classes
+//		pc.setAc(10);
+//		pc.levelUp(); // Sets character to level 1, giving appropriate starting scores.
+//		pc.inventory = new Inventory(charClass);
+//		return pc;
+//	}
 	
 	/**
 	 * Levels up the character class with appropriate attributes and abilities.
@@ -212,7 +243,8 @@ public class PlayerCharacter {
 	}
 
 	public double getFortitude() {
-		return fortitude;
+		int bonus = (constitution - 10) / 2;
+		return fortitude + bonus;
 	}
 
 	public void setFortitude(double fortitude) {
@@ -220,7 +252,8 @@ public class PlayerCharacter {
 	}
 
 	public double getWill() {
-		return will;
+		int bonus = (wisdom - 10) / 2;
+		return will + bonus;
 	}
 
 	public void setWill(double will) {
@@ -228,7 +261,8 @@ public class PlayerCharacter {
 	}
 
 	public double getReflex() {
-		return reflex;
+		int bonus = (dexterity - 10) / 2;
+		return reflex + bonus;
 	}
 
 	public void setReflex(double reflex) {
@@ -255,13 +289,13 @@ public class PlayerCharacter {
 				+ "\nWisdom: " + wisdom + "\nDexterity: " + dexterity
 				+ "\nCharisma: " + charisma + "\nConstitution: " + constitution
 				+ "\nBAB: " + (int)bab + "\nSaves (Fort/Will/Reflex): " 
-				+ (int)fortitude + "/" + (int)will + "/" + (int)reflex 
-				+ "\nFaction: " + faction;
+				+ (int)getFortitude() + "/" + (int)getWill() + "/" 
+				+ (int)getReflex() + "\nFaction: " + faction;
 	}
 	
 	@Override
 	public String toString() { // Add inventory later
-		return name + "," + charClass + "," + hp + "," + currentHp + "," + getAc()  + "," + level
+		return name + "," + charClass + "," + hp + "," + currentHp + "," + acBonus  + "," + level
 				+ "," + xp + "," + strength + "," + intellect + "," + wisdom + "," + dexterity
 				+ "," + charisma + "," + constitution + "," + bab + "," + fortitude
 				+ "," + will  + "," + reflex + "," + faction;

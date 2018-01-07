@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.bms.adventure.characters.AllCharacters;
 import com.bms.adventure.characters.PlayerCharacter;
 
 /**
@@ -37,7 +38,7 @@ public class PlayerRecordIO {
 		if (record.length != 10) {
 			throw new IllegalArgumentException("Improper player parameters.");
 		}
-//		name + "," + charClass + "," + hp + "," + currentHp + "," + getAc()  + "," + level
+//		name + "," + charClass + "," + hp + "," + currentHp + "," + ac  + "," + level
 //		+ "," + xp + "," + strength + "," + intellect + "," + wisdom + "," + dexterity
 //		+ "," + charisma + "," + constitution + "," + bab + "," + fortitude
 //		+ "," + will  + "," + reflex + "," + faction;
@@ -59,7 +60,11 @@ public class PlayerRecordIO {
 		double will = Double.parseDouble(record[15]);
 		double reflex = Double.parseDouble(record[16]);
 		String faction = record[17];
-		return null;
+		
+		PlayerCharacter pc = PlayerCharacter.reloadCharacter(name, charClass, hp,
+				currentHp, acBonus, level, xp, strength, intellect, wisdom, dexterity,
+				charisma, constitution, bab, fortitude, will, reflex, faction);
+		return pc;
 		
 //		String name = record[0];
 //		int weight = Integer.parseInt(record[1]);

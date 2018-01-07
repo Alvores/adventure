@@ -15,14 +15,14 @@ public class AllCharacters {
 		String party = "";
 		
 		for (String pc: partyNames) {
-			party += playerList.get(pc).toString() + "\n\n";
+			party += playerList.get(pc).styledToString() + "\n\n";
 		}
 		
 		return party;
 	}
 	
 	public static String playerInformation (String name) {
-		return playerList.get(name).toString();
+		return playerList.get(name).styledToString();
 	}
 	
 }
