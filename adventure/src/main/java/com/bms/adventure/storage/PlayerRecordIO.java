@@ -82,8 +82,12 @@ public class PlayerRecordIO {
 	// PlayerRecords
 	public static void writePlayerRecords(String file, ArrayList<PlayerCharacter> players) throws IOException {
 		try (PrintStream output = new PrintStream(new File(file))) {
-			for (PlayerCharacter p : players) {
-				output.print(p.toString());
+//			for (PlayerCharacter p : players) {
+//				output.println(p.toString());
+//			}
+			for (int i = 0; i < players.size(); i++) {
+				output.print(players.get(i).toString());
+				if (i + 1 != players.size()) output.print("\n");
 			}
 		}
 	}
