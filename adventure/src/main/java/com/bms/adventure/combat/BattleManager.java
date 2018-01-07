@@ -15,21 +15,25 @@ public class BattleManager {
 	public BattleManager (PlayerCharacter player, PlayerCharacter opponent) {
 		this.player = player;
 		this.opponent = opponent;
+		battle();
 	}
 	
 	public void battle() {
 		System.out.println("The combatants are:");
-		System.out.println(player.toString());
-		System.out.println(opponent.toString());
+		System.out.println(player.styledToString());
+		System.out.println(opponent.styledToString());
 		int round = 1;
-		boolean fighting = false;
+		boolean fighting = true;
 		int playerInitiative;
 		int opponentInitiative;
 		
 		while (fighting) {
 			System.out.println("Round " + round + ": ");
+			// Calculate initiative and allot turns to combatants
 			playerInitiative = Dice.rollDice(1, 20, (player.getDexterity() - 10) / 2);
 			opponentInitiative = Dice.rollDice(1, 20, (player.getDexterity() - 10) / 2);
+			System.out.println(player.getName() + " initiative: " + playerInitiative);
+			System.out.println(opponent.getName() + " initiative: " + opponentInitiative);
 			if (playerInitiative > opponentInitiative) {
 				fighting  = turn(player, opponent);
 				if (!fighting) break;
@@ -45,12 +49,17 @@ public class BattleManager {
 	}
 	
 	public boolean turn(PlayerCharacter attacker, PlayerCharacter defender) {
-		if (player.getHp() <= 0 || opponent.getHp() <= 0) {
+		if (player.getCurrentHp() <= 0 || opponent.getCurrentHp() <= 0) {
 			return false;
 		}
 		attackTarget(attacker, defender);
 		System.out.println(attacker.getName() + " has " + attacker.getCurrentHp() + 
 				" and " + defender.getName() + " has " + defender.getCurrentHp());
+		if (attacker.getCharClass().equals("Rogue")) { // Attack with second dagger
+			attackTarget(attacker, defender);
+			System.out.println(attacker.getName() + " has " + attacker.getCurrentHp() + 
+					" and " + defender.getName() + " has " + defender.getCurrentHp());
+		}
 		return true;
 	}
 	
@@ -60,18 +69,27 @@ public class BattleManager {
 		int roll = Dice.rollDice(1, 20);
 		// Check hit
 		if (roll == 20) { // Natural 20
-			System.out.println("The attacker hits the target with a roll of 20.");
+			System.out.println(attacker.getName() + " hits " + defender.getName() + " with a roll of 20.");
 		} else if (roll == 1) { // Natural miss
-			System.out.println("The attacker misses the target with a roll of 1.");
+			System.out.println(attacker.getName() + " misses "+ defender.getName() + " with a roll of 1.");
 		} else { // Check total hit roll against defenders armor class
 			roll += attacker.attackRollBonus();
 			if (roll < defender.getAc()) {
+				System.out.println(attacker.getName() + " misses " + 
+						defender.getName() + " with a roll of " + roll);
 				return;
 			} 
 		}
+		System.out.println(attacker.getName() + " hits " + defender.getName() + " with a roll of " + roll);
 		// Check crit if applicable
 		int critThreshold = attacker.getInventory().getWeapon().getWeaponSpecifications().getCritThreshold();
-		if (roll >= critThreshold) crit = true;
+		if (roll >= critThreshold) {
+			roll = Dice.rollDice(1, 20);
+			if (roll < defender.getAc()) {
+				System.out.println(attacker.getName() + " has critically hit " + defender.getName() + "!");
+				crit = true;
+			}
+		}
 		// Roll for damage if applicable
 		int damage = attacker.damageRollTotal();
 		if (crit) {

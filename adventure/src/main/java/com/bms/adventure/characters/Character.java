@@ -1,7 +1,7 @@
 package com.bms.adventure.characters;
 
 /**
- * The Character class represents a basic mold for living creatures.
+ * The Character class represents a basic mold for all creatures.
  * @author Gabriel Zingle
  *
  */

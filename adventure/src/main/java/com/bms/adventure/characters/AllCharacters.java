@@ -6,7 +6,7 @@ import java.util.Set;
 public class AllCharacters {
 	private static HashMap<String, PlayerCharacter> playerList = new HashMap<String, PlayerCharacter>();
 	
-	public static void addMember (PlayerCharacter pc) {
+	public static void addMember(PlayerCharacter pc) {
 		playerList.put(pc.getName(), pc);
 	}
 	
@@ -25,4 +25,8 @@ public class AllCharacters {
 		return playerList.get(name).styledToString();
 	}
 	
+	
+	public static PlayerCharacter retrievePlayer(String name) {
+		return playerList.get(name);
+	}
 }
